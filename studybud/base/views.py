@@ -9,6 +9,8 @@ from .forms import RoomForm
 # Create your views here.
 
 def loginPage(request):
+    username = None
+    password = None
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -24,10 +26,15 @@ def loginPage(request):
     if user is not None:
         login(request, user)
         return redirect('home')
-    else: messages.error(request, 'Username OR password does not exist')
+    else: 
+        messages.error(request, 'Username OR password does not exist')
 
     context = {}
     return render(request, 'base/login_register.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
