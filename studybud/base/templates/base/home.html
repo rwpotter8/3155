@@ -35,7 +35,6 @@
         <div>
             {% for room in rooms %}
                 <div>
-                    page = 'login'
                     {% if request.user == room.host %}
                     <a href="{% url 'update-room' room.id %}">Edit</a>
                     <a href="{% url 'delete-room' room.id %}">Delete</a>
